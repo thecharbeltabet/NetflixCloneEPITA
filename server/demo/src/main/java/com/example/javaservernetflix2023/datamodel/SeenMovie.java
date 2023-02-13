@@ -1,16 +1,25 @@
 package com.example.javaservernetflix2023.datamodel;
 
-import java.util.Date;
 
+import java.util.Date;
+import javax.persistence.*;
+
+@Entity
+@Table(name = "SEEN_MOVIES")
 public class SeenMovie {
 
-    private Date date;
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "SEEN_MOVIE_ID")
     private int seenMovieId;
 
+    @Column(name = "DATE")
+    private Date date;
 
+    @ManyToOne
     private User user;
 
+    @ManyToOne
     private Movie movie;
 
     public SeenMovie() {

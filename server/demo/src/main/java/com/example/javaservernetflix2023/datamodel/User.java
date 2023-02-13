@@ -1,15 +1,28 @@
 package com.example.javaservernetflix2023.datamodel;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "USERS")
 public class User {
 
-    private String user_id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_USER_ID", columnDefinition = "BIGINT")
+    private int user_id;
 
+    @Column(name = "USERNAME")
     private String username;
 
+    @Column(name = "PASSWORD")
     private String password;
 
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "CONTACT_ID")
     private Contact contact;
 
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "ROLE_ID")
     private Role role;
 
     public User() {}
@@ -18,7 +31,6 @@ public class User {
         this.username = username;
         this.password = password;
     }
-
 
     public User(String username, String password, Contact contact, Role role) {
         this.username = username;
@@ -36,6 +48,15 @@ public class User {
                 ", role=" + role +
                 '}';
     }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
 
     public String getUsername() {
         return username;

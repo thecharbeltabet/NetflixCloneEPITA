@@ -1,27 +1,34 @@
 package com.example.javaservernetflix2023.datamodel;
 
+import javax.persistence.*;
+
+
+@Entity
+@Table(name = "ADDRESSES")
 public class Address {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ADDRESS_ID")
     private int address_id;
 
+    @Column(name = "COUNTRY")
     private String country;
 
+    @Column(name = "AREA")
     private String area;
 
+    @Column(name = "CITY")
     private String city;
 
+    @Column(name = "STREET")
     private String street;
 
+    @Column(name = "NUMBER")
     private String number;
 
-    public Address(int address_id, String country, String area, String city, String street, String number) {
-        this.address_id = address_id;
-        this.country = country;
-        this.area = area;
-        this.city = city;
-        this.street = street;
-        this.number = number;
-    }
+    public Address() {}
+
 
 
     @Override

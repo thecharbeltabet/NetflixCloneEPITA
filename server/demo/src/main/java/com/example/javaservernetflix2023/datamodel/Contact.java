@@ -1,22 +1,40 @@
 package com.example.javaservernetflix2023.datamodel;
 
+import javax.persistence.*;
+
 import java.util.Date;
 
+@Entity
+@Table(name = "CONTACTS")
 public class Contact {
 
+    @Id
+    @Column(name = "NAME")
     private String name;
 
+    @Column(name = "BIRTHDATE")
     private Date birthDate;
 
+    @Column(name = "GENDER")
     private String gender;
 
+    @Column(name = "EMAIL")
     private String email;
 
-    public Contact(String name, Date birthDate, String gender, String email) {
+    @OneToOne(cascade = CascadeType.ALL)
+    private Address BillingAddress;
+
+
+    public Contact() {
+    }
+
+
+    public Contact(String name, Date birthDate, String gender, String email, Address BillingAddress) {
         this.name = name;
         this.birthDate = birthDate;
         this.gender = gender;
         this.email = email;
+        this.BillingAddress = BillingAddress;
     }
 
     public String getName() {
@@ -51,6 +69,16 @@ public class Contact {
         this.email = email;
     }
 
+    public Address getBillingAddress() {
+        return BillingAddress;
+    }
+
+    public void setBillingAddress(Address BillingAddress) {
+        this.BillingAddress = BillingAddress;
+    }
+
+
+
     @Override
     public String toString() {
         return "Contact{" +
@@ -58,6 +86,7 @@ public class Contact {
                 ", birthDate=" + birthDate +
                 ", gender='" + gender + '\'' +
                 ", email='" + email + '\'' +
+                ", BillingAddress='" + BillingAddress + '\'' +
                 '}';
     }
 }
