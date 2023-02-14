@@ -17,7 +17,7 @@ useUnifiedTopology: true,
 
 const database = mongoose.connection;
 
-database.on('error', (error) => {
+database.on('error', (error: Error) => {
 console.log(error);
 });
 

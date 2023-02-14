@@ -18,4 +18,4 @@ type: String,
 }
 });
 
-export default mongoose.model<mongoose.Document>('Rating', RatingModel);
+export default mongoose.model('Rating', RatingModel);

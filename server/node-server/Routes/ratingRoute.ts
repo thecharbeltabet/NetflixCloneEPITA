@@ -1,10 +1,12 @@
-import express from 'express';
+import express from 'Express';
 import RatingModel from '../Models/rating';
 
 const router = express.Router();
 
+
+
 // post a rating
-router.post('/post', async (req, res) => {
+router.post('/postRating', async (req: express.Request, res: express.Response) => {
   const { rating, commentTitle, commentContent, userId, movieId } = req.body;
   const newRating = new RatingModel({
     rating,
@@ -17,12 +19,12 @@ router.post('/post', async (req, res) => {
     const savedRating = await newRating.save();
     res.status(200).json(savedRating);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(400).json({ message: Error });
   }
 });
 
 // get a rating by movieId
-router.get('/ratings/movieId/:movieId', async (req, res) => {
+router.get('/ratings/movieId/:movieId', async (req: express.Request , res: express.Response) => {
   const { movieId } = req.params;
   try {
     const ratings = await RatingModel.find({ movieId });
@@ -33,7 +35,7 @@ router.get('/ratings/movieId/:movieId', async (req, res) => {
 });
 
 // get all ratings
-router.get('/ratings', async (req, res) => {
+router.get('/ratings', async (req: express.Request, res: express.Response) => {
   try {
     const ratings = await RatingModel.find();
     res.send(ratings);
@@ -42,4 +44,4 @@ router.get('/ratings', async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router ;
