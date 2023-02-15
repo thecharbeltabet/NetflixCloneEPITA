@@ -1,7 +1,8 @@
-import React from 'react'
-import { Facebook, Twitter, Instagram, Youtube} from '@mui/icons-material'
+import React from 'react';
+import './footer.scss';
+import { Facebook, Twitter, Instagram, Youtube} from '@mui/icons-material';
 
-const footer = () => {
+const Footer = () => {
     return (
         <footer className='footer'>
             <div className='footer__container'>
@@ -51,4 +52,4 @@ const footer = () => {
     )
 }
 
-export default footer
+export default Footer

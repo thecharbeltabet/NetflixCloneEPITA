@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 
+
+
 const mongoURL = process.env.DB_URL;
 console.log(mongoURL)
 
@@ -37,7 +39,11 @@ origin: 'http://localhost:3000',
 
 app.use(express.json());
 
+app.use(cors({ origin: 'http://localhost:3000' }));
+
+
 app.use('/api', routes);
+
 
 app.listen(process.env.PORT, () => {
     
