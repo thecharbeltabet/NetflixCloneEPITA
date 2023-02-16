@@ -2,6 +2,7 @@ package com.example.javaservernetflix2023;
 
 import com.example.javaservernetflix2023.services.MovieDAO;
 import com.sun.istack.NotNull;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -58,11 +59,14 @@ public class InsertMoviesTest {
         String genresofMovies[] = {"trending", "topRated", "romance", "horror", "documentary", "comedy", "action"};
 
 
+        int counter = 0;
 
         for (String genre : genresofMovies) {
             try(FileReader reader = new FileReader("src/main/resources/" + genre + "Movies.json")) {
                 //Read JSON file
                 Object obj = jsonParser.parse(reader);
+                counter++;
+                System.out.println("This is the counter:"+ counter);
 
                 JSONArray moviesList = (JSONArray) obj;
 
@@ -83,6 +87,7 @@ public class InsertMoviesTest {
         JSONObject movieObject = (JSONObject) movie.get("movie");
 
         System.out.println(movieObject);
+
 
         String overview = movieObject.containsKey("overview") ? (String) movieObject.get("overview") : "";
         String backdropURL = movieObject.containsKey("backdrop_path") ? (String) movieObject.get("backdrop_path") : "";
@@ -113,8 +118,12 @@ public class InsertMoviesTest {
         movieObject = (JSONObject) movie.get("movie");
 
 
-        MovieDAO movieDAO = new MovieDAO(sf);
-        movieDAO.addMovie(movie1);
+        try (Session session = sf.openSession()) {
+            MovieDAO movieDAO = new MovieDAO(sf);
+            movieDAO.addMovie(movie1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

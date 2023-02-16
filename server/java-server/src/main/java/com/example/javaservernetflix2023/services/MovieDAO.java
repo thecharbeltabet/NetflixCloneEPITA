@@ -59,6 +59,7 @@ public class MovieDAO {
         Transaction transaction = session.beginTransaction();
         session.save(session.merge(movie));
         transaction.commit();
+        session.close();
     }
 
     public List<Movie> getAllMovies() {
