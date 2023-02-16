@@ -1,0 +1,201 @@
+.viewModal {
+    position: fixed;
+    z-index: 2;
+    background-color: #111;
+    border-radius: 10px;
+    height: calc(100vh - 90px);
+    top: 60px;
+    margin: 0 2%;
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.7);
+    overflow-y: auto;
+    display: none;
+
+    &.open {
+        display: block;
+    }
+
+    &__banner {
+        padding-top: 50vh;
+        height: 50vh;
+    }
+
+    &__content {
+        padding: 3rem;
+        font-size: 1rem;
+    }
+
+    &__description {
+        font-weight: 300;
+    }
+
+    &__close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: none;
+        cursor: pointer;
+        color: #fff;
+    }
+
+    &__buttons {
+        display: flex;
+
+        @media screen and (min-width: 768px) {
+            font-size: 1.1rem;
+            padding: 0.8rem 0;
+        }
+
+        svg {
+            margin-right: 0.4rem;
+        }
+
+        .viewModal__button {
+            display: flex;
+            cursor: pointer;
+            flex-direction: row;
+            justify-content: space-around;
+            border-radius: 4px;
+            align-items: center;
+            padding: 0.4rem 1rem 0.4rem 0.5rem;
+            margin-right: 0.7rem;
+            color: inherit;
+            font-weight: 600;
+            background-color: rgba(110, 110, 110, 0.7);
+
+            &--play {
+                background-color: rgba(255, 255, 255, 0.7);
+                color: black;
+            }
+
+        }
+    }
+
+    .viewModal__reviews {
+        margin-top: 20px;
+    }
+
+    .viewModal__addReview {
+        border-style: solid;
+        border-color: rgb(60, 59, 59);
+        border-width: 3px;
+        border-radius: 4px;
+        padding: 5px;
+
+        .loginButton {
+            width: 100%;
+            margin: 10px 0;
+            padding: 15px;
+            background-color: #E50914;
+            border: none;
+            cursor: pointer;
+            color: white;
+            font-size: 17px;
+
+            &:hover {
+                background-color: #b40510;
+                color: white;
+            }
+        }
+
+        &__text {
+            color: #fff;
+            font-size: 0.9rem;
+            background-color: #111;
+            max-width: 100%;
+            min-width: 100%;
+            min-height: 200px;
+            max-height: 400px;
+            border: none;
+            padding: 0.4rem 1rem 0.4rem 0.5rem;
+
+        }
+
+        &__rating {
+            display: flex;
+            flex-direction: row;
+            height: 40px;
+            background-color: #111;
+
+            .viewModal__addReview__rating {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                padding: 0.4rem 1rem 0.4rem 0.5rem;
+                margin-right: 0.7rem;
+                color: inherit;
+                font-weight: 600;
+            }
+
+            .viewModal__addReview__rating--input {
+                cursor: pointer;
+                font-size: large;
+                color: #fff;
+            }
+
+            .viewModal__addReview__rating--button {
+                display: flex;
+                cursor: pointer;
+                border-radius: 4px;
+                align-items: center;
+                margin-right: 0.7rem;
+                color: inherit;
+                font-size: 0.9rem;
+                font-weight: 600;
+                background-color: rgba(110, 110, 110, 0.7);
+            }
+        }
+    }
+
+
+
+    .viewModal__review {
+        margin-top: 1rem;
+        font-weight: 300;
+        font-size: 1rem;
+
+
+        &--author {
+            font-size: 0.9rem;
+            font-weight: 200;
+            margin-bottom: 0.5rem;
+        }
+
+        &--title {
+            font-size: 1.1rem;
+        }
+
+        &--content {
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+
+        &--rating {
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        &--date {
+            font-size: 0.9rem;
+            font-weight: 200;
+            margin-bottom: 2.5rem;
+        }
+    }
+
+
+    @media screen and (min-width: 768px) {
+        width: 50%;
+        left: 25%;
+        right: 25%;
+    }
+
+    ::-webkit-scrollbar {
+        -webkit-appearance: none;
+        background-color: rgb(31, 29, 29);
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background-color: rgba(82, 81, 81, 0.7);
+        box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+    }
+}

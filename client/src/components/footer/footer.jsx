@@ -1,34 +1,34 @@
-import React from 'react';
-import './footer.scss';
-import { Facebook, Twitter, Instagram, Youtube} from '@mui/icons-material';
+import React from 'react'
+import './Footer.scss'
+import { Github, Twitter, LinkedIn, YouTube } from '@mui/icons-material'
 
-const Footer = () => {
+function Footer() {
     return (
         <footer className='footer'>
             <div className='footer__container'>
                 <div className='footer__socials'>
-                    <a href='/#' className='footer__social-link'>
-                        <Facebook />
+                    <a href='https://github.com/thecharbeltabet' className='footer__social-link'>
+                        <Github />
                     </a>
                     <a href='/#' className='footer__social-link'>
                         <Twitter />
                     </a>
-                    <a href='/#' className='footer__social-link'>
-                        <Instagram />
+                    <a href='https://www.linkedin.com/in/charbel-tabet/' className='footer__social-link'>
+                        <LinkedIn />
                     </a>
-                    <a href='/#' className='footer__social-link'>
+                    <a href='https://www.youtube.com/@Netflix' className='footer__social-link'>
                         <YouTube />
                     </a>
                 </div>
                 <ul className='footer__links'>
                     <li className='footer__link'>
                         <a href='/'>
-                            About
+                            About Netflix Clone
                         </a>
                     </li>
                     <li className='footer__link'>
                         <a href='/'>
-                            Contact
+                            Contact Charbel
                         </a>
                     </li>
                     <li className='footer__link'>
@@ -44,7 +44,7 @@ const Footer = () => {
                 </ul>
                 <div className='footer__copyright'>
                     <p>
-                        NetflixClone © 2023. Charbel Tabet.
+                        Netflix Clone © 2023. By Charbel Y. Tabet.
                     </p>
                 </div>
             </div>
