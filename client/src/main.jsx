@@ -1,14 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './styles/main.scss';
-import './components/dummy/dummy.jsx';
-function App() {
-  return (
-  <div>
-  <h1>Starting</h1>
-  <dummy></dummy>
-  </div>
-  );
-}
+import ReactDOM from 'react-dom/client';
+import './main.css';
+import App from './App';
+import { AppStateProvider } from './store/providers';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <AppStateProvider>
+      <App />
+    </AppStateProvider>
+  </React.StrictMode>
+);
