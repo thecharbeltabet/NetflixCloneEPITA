@@ -72,6 +72,12 @@ public class MovieController {
         return movieRepository.getTopViewedMovies();
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping("/movies/addView")
+    public Movie addView(int id){
+        return movieRepository.addViewCount(id);
+    }
+
 
 
 }
