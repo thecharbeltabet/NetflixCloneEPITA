@@ -146,7 +146,7 @@ export const contactInputs = [
       name: 'movieId',
       type: 'text',
       placeholder: 'Movie Id',
-      required: true,
+      required: false,
       hidden: true,
     },
   ];

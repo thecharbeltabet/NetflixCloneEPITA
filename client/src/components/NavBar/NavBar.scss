@@ -9,7 +9,7 @@
     width: 100%;
     color: white;
     font-size: 0.9rem;
-    background: linear-gradient(to bottom, rgba(58, 58, 58, 0.6), rgba(0, 0, 0, 0));
+    background: linear-gradient(to bottom, rgba(226, 98, 98, 0.6), rgba(216, 34, 34, 0));
     transition: background-color 0.3s ease-in-out;
 
     a {
@@ -36,6 +36,12 @@
         max-width: 100px;
     }
 
+    &__logo2{
+        max-width: 100px;
+        max-height: 90px;
+        margin-left: 37%;
+    }
+
     &__links {
         margin-left: 20px;
         transition: background-color 0.3s ease-in-out;
@@ -46,7 +52,7 @@
             padding: 5px 10px;
         }
 
-        @media screen and(max-width:767.98px) {
+        @media screen and (max-width:767.98px) {
             margin-left: 0;
             visibility: hidden;
             position: absolute;
@@ -69,6 +75,8 @@
             }
         }
     }
+
+
 
     &__actions {
         display: flex;
@@ -93,3 +101,4 @@
         }
     }
 }
+

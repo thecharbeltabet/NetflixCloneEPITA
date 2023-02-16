@@ -1,6 +1,6 @@
 import './App.scss';
 import React, { useEffect } from "react";
-import Home from './pages/Home';
+import Home from './pages/Home/Home';
 import Video from './components/Video/Video';
 import LoginPage from './pages/Login/LoginPage';
 import ContactPage from './pages/Register/ContactPage';
@@ -11,7 +11,7 @@ import SubscriptionPage from './pages/Register/SubscriptionPage';
 import { ToastContainer } from 'react-toastify';
 
 // state context
-import useAppStateContext from './hooks/useAppStateContext';
+import useAppStateContext from './hooks/hook';
 
 // Routes
 import { PrivateRoute, PublicRoute } from './Routes/Routes';

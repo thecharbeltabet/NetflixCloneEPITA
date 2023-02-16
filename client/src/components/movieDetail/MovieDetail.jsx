@@ -49,7 +49,6 @@ function MovieDetail({ movie, backgroundImage, handleClickPopup, popup }) {
     useEffect(() => {
         async function fetchData() {
             const { data } = await getRatings(movie.movie_id)
-            console.log(movie.movie_id)
             setReviews(data)
         }
         fetchData()
@@ -58,7 +57,7 @@ function MovieDetail({ movie, backgroundImage, handleClickPopup, popup }) {
 
 
     const handlePostRating = async (rating) => {
-        postRating(formValues, movieId);
+        postRating(formValues, movie.movie_id);
     }
 
     // Pressing play taking to youtube and adding view count

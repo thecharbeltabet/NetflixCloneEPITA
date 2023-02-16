@@ -42,9 +42,9 @@ function Navbar() {
                 <MenuOutlined />
             </button>
             <img onClick={logoClick} className="navbar__logo" src="../images/logo.png" alt="Netflix logo" />
-            <div className="navbar__actions">
-                Logout
-                <button onClick={handleLogout} className="logout__button">
+            <img   className = "navbar__logo2" src="../images/Logo.JPG" alt="Charbel logo" />
+            <div  className="navbar__actions">
+                <button  onClick={handleLogout} className="logout__button" >
                     <LogoutOutlined />
                 </button>
             </div>

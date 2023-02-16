@@ -1,5 +1,5 @@
 .footer {
-    padding: 1rem;
+    padding: 0rem;
     margin-top: 0.7rem;
     text-align: center;
     color: grey;
@@ -44,7 +44,7 @@
 
         .footer__link {
             flex: 1 0 25%;
-            margin-bottom: 1.1rem;
+            margin-bottom: 0rem;
 
             @media screen and (min-width: 768px) {
                 flex: 1 0 25%;
@@ -54,7 +54,8 @@
     }
 
     &__copyright {
-        margin-top: 1rem;
+        margin-top: 2rem;
+        margin-bottom: 0;
         font-size: 0.8rem;
     }
 }

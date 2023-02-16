@@ -1,6 +1,6 @@
 import React from 'react'
 import './Footer.scss'
-import { Github, Twitter, LinkedIn, YouTube } from '@mui/icons-material'
+import { GitHub, Twitter, LinkedIn, YouTube } from '@mui/icons-material'
 
 function Footer() {
     return (
@@ -8,7 +8,7 @@ function Footer() {
             <div className='footer__container'>
                 <div className='footer__socials'>
                     <a href='https://github.com/thecharbeltabet' className='footer__social-link'>
-                        <Github />
+                        <GitHub />
                     </a>
                     <a href='/#' className='footer__social-link'>
                         <Twitter />

@@ -3,11 +3,11 @@ import './Banner.scss'
 import { HelpOutline, PlayArrow } from "@mui/icons-material";
 
 import axios from 'axios'
-import requests from '../../config/Requests';
+import requests from '../../configuration/config'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-import MovieDetail from '../CustomModals/MovieDetail';
+import MovieDetail from '../movieDetail/MovieDetail';
 
 // Banner component
 function Banner() {

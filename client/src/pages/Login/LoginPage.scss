@@ -1,0 +1,44 @@
+.Auth-form-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 450px;
+    height: 100vh;
+    margin: 0 auto;
+    padding: 0 15px;
+
+    .Auth-form {
+        width: 80%;
+        margin-top: 20px;
+
+        .loginButton {
+            width: 100%;
+            margin: 10px 0;
+            padding: 15px;
+            background-color: #E50914;
+            border: none;
+            cursor: pointer;
+            color: white;
+            font-size: 19px;
+
+            &:hover {
+                background-color: #b40510;
+                color: white;
+            }
+        }
+
+        .noPassword {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: white;
+
+            .SMS_Signup {
+                text-decoration: none;
+                color: white;
+                cursor: pointer;
+            }
+        }
+    }
+}
