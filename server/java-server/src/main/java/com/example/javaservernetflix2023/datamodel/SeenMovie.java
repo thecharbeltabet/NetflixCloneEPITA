@@ -16,10 +16,10 @@ public class SeenMovie {
     @Column(name = "DATE")
     private Date date;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Movie movie;
 
     public SeenMovie() {

@@ -20,31 +20,35 @@ public class Movie {
 
 
     @Column(name = "GENRES")
-    @ElementCollection(targetClass=String.class)
-    private List<String> genres;
+    private String genre;
 
     @Column(name = "ADDED")
-    private Date added;
+    private String added;
 
-    @Column(name = "DESCRIPTION")
+    @Column(name = "DESCRIPTION" , length = 2048)
     private String description;
 
     @Column(name = "POSTER_URL")
     private String PosterURL;
 
-    @Column(name = "EXTERNAL_ID")
-    private String external_id;
+    @Column(name = "BACKDROP_URL")
+    private String backdropURL;
+
+
+    @Column(name = "VIEWS")
+    private int views;
 
     public Movie() {}
 
-    public Movie(int movie_id, String description, String PosterURL, List<String> genres, String title, Date added, String external_id) {
+    public Movie(int movie_id, String description, String PosterURL,String backdropURL, String genre, String title, String added, int views) {
         this.movie_id = movie_id;
         this.description = description;
         this.PosterURL = PosterURL;
-        this.genres = genres;
+        this.backdropURL = backdropURL;
+        this.genre = genre;
         this.title = title;
         this.added = added;
-        this.external_id = external_id;
+        this.views = views;
     }
 
     @Override
@@ -55,8 +59,8 @@ public class Movie {
                 ", added=" + added +
                 ", description='" + description + '\'' +
                 ", PosterURL='" + PosterURL + '\'' +
-                ", genres='" + genres + '\'' +
-                ", external_id='" + external_id + '\'' +
+                ", backdropURL='" + backdropURL + '\'' +
+                ", genres='" + genre + '\'' +
                 '}';
     }
 
@@ -84,6 +88,14 @@ public class Movie {
         this.PosterURL = PosterURL;
     }
 
+    public String getBackdropURL() {
+        return backdropURL;
+    }
+
+    public void setBackdropURL(String backdropURL) {
+        this.backdropURL = backdropURL;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -92,27 +104,27 @@ public class Movie {
         this.description = description;
     }
 
-    public List<String> getGenres() {
-        return genres;
+    public String getGenre() {
+        return genre;
     }
 
-    public void setGenres(List<String> genres) {
-        this.genres = genres;
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 
-    public Date getAdded() {
+    public String getAdded() {
         return added;
     }
 
-    public void setAdded(Date added) {
+    public void setAdded(String added) {
         this.added = added;
     }
-
-    public String getExternal_id() {
-        return external_id;
+    public int getViews() {
+        return views;
     }
 
-    public void setExternal_id(String external_id) {
-        this.external_id = external_id;
+    public void setViews(int views) {
+        this.views = views;
     }
+
 }

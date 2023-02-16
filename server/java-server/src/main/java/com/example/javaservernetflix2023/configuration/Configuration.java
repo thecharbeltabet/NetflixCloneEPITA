@@ -21,7 +21,7 @@ public class Configuration {
     public org.springframework.jdbc.datasource.DriverManagerDataSource postgresDataSource() {
         org.springframework.jdbc.datasource.DriverManagerDataSource postgresDataSource = new org.springframework.jdbc.datasource.DriverManagerDataSource();
         postgresDataSource.setDriverClassName("org.postgresql.Driver");
-        postgresDataSource.setUrl("jdbc:postgresql://localhost:5432/postgres");
+        postgresDataSource.setUrl("jdbc:postgresql://localhost:5432/netflix");
         postgresDataSource.setUsername("postgres");
         postgresDataSource.setPassword("postgres");
         return postgresDataSource;

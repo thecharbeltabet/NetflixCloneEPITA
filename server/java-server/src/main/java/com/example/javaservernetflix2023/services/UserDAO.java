@@ -13,70 +13,63 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 
-// This is the DAO class for the User class
 @Service
-public class UserJPADAO {
+public class UserDAO {
 
-
-    //
     private final SessionFactory factory;
 
-    public UserJPADAO(SessionFactory factory) {
+    public UserDAO(SessionFactory factory) {
         this.factory = factory;
     }
 
-
-    //Get a user by his username
-    public User getUserbyUsername(String username){
-        Session session = factory.openSession();
+    public User getUserbyUsername(String username) {
+        Session session = getSession();
         Query<User> query = session.createQuery("from User where username = :username");
         query.setParameter("username", username);
+        User user = query.uniqueResult();
         session.close();
-        return query.uniqueResult();
+        return user;
     }
 
-    // Get all users
     public List<User> getAllUsers() {
-        Session session = factory.openSession();
+        Session session = getSession();
         Query<User> query = session.createQuery("from User");
         List<User> users = query.list();
         session.close();
         return users;
     }
 
-
-    //Get a user by his id
     public User getUserById(int user_id) {
-        Session session = factory.openSession();
+        Session session = getSession();
         Query<User> query = session.createQuery("from User where USER_ID = :USER_ID");
         query.setParameter("USER_ID", user_id);
-        return query.uniqueResult();
+        User user = query.uniqueResult();
+        session.close();
+        return user;
     }
 
-    //Delete a user by his id
-    public User deleteUserById(int user_id) {
-        Session session = factory.openSession();
+    public void deleteUserById(int user_id) {
+        Session session = getSession();
         Query<User> query = session.createQuery("delete from User where USER_ID = :USER_ID");
         query.setParameter("USER_ID", user_id);
-        return query.uniqueResult();
+        Transaction transaction = session.beginTransaction();
+        query.executeUpdate();
+        transaction.commit();
+        session.close();
     }
 
-    //Update a user by his id
-    public User updateUserById(int user_id) {
-        Session session = factory.openSession();
-        Query<User> query = session.createQuery("update User where USER_ID = :USER_ID");
-        query.setParameter("USER_ID", user_id);
-        return query.uniqueResult();
+    public void updateUser(User user) {
+        Session session = getSession();
+        Transaction transaction = session.beginTransaction();
+        session.update(user);
+        transaction.commit();
+        session.close();
     }
 
-
-    //Add a user's address by updating the user
     public User addAddress(String username, String country, String area, String city, String street, String number) {
-        // get user by username
         User user = getUserbyUsername(username);
         Contact contact = user.getContact();
         Address address = new Address();
-
         address.setCountry(country);
         address.setArea(area);
         address.setCity(city);
@@ -84,21 +77,11 @@ public class UserJPADAO {
         address.setNumber(number);
         contact.setBillingAddress(address);
         user.setContact(contact);
-
-        Session session = getSession();
-        Transaction transaction = session.beginTransaction();
-
-
-        session.update(user);
-
-        transaction.commit();
-        session.close();
+        updateUser(user);
         return user;
     }
 
-    //Add a user's contact by updating the user
     public User addContact(String username, String name, String email, String gender, Date birthDate){
-        //get user by username
         User user = getUserbyUsername(username);
         Contact contact = new Contact();
         contact.setEmail(email);
@@ -106,52 +89,34 @@ public class UserJPADAO {
         contact.setGender(gender);
         contact.setName(name);
         user.setContact(contact);
-
-        //update user
-        Session session = getSession();
-        Transaction transaction = session.beginTransaction();
-        session.update(user);
-        transaction.commit();
-        session.close();
+        updateUser(user);
         return user;
-
-
-
     }
 
-    //Register a new user
     public User register(String username, String password){
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
-        Session session = factory.openSession();
+        Session session = getSession();
         Transaction transaction = session.beginTransaction();
         session.save(user);
         transaction.commit();
         session.close();
         return user;
-
     }
 
-    //Add a user's role by updating the user
     public User addRole(String username, String roleName) {
-        // get user by username
         User user = getUserbyUsername(username);
         Role role = new Role();
         role.setName(roleName);
-
         user.setRole(role);
-
-        // update found user
-        Session session = getSession();
-        Transaction transaction = session.beginTransaction();
-        session.update(user);
-        transaction.commit();
-        session.close();
+        updateUser(user);
         return user;
     }
 
-    public Session getSession() {
+
+
+        public Session getSession() {
         Session currentSession = null;
         try {
             currentSession = this.factory.getCurrentSession();

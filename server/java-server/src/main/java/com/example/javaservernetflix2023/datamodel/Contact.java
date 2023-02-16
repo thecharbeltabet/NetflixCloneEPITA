@@ -9,6 +9,10 @@ import java.util.Date;
 public class Contact {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name ="ID")
+    private int id;
+
     @Column(name = "NAME")
     private String name;
 
@@ -29,12 +33,21 @@ public class Contact {
     }
 
 
-    public Contact(String name, Date birthDate, String gender, String email, Address BillingAddress) {
+    public Contact(int id,String name, Date birthDate, String gender, String email, Address BillingAddress) {
+        this.id = id;
         this.name = name;
         this.birthDate = birthDate;
         this.gender = gender;
         this.email = email;
         this.BillingAddress = BillingAddress;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

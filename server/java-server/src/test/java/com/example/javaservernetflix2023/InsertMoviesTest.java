@@ -1,5 +1,12 @@
 package com.example.javaservernetflix2023;
 
+import com.example.javaservernetflix2023.services.MovieDAO;
+import com.sun.istack.NotNull;
+import org.hibernate.SessionFactory;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import com.example.javaservernetflix2023.configuration.Configuration;
@@ -8,23 +15,17 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.assertNotNull;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.sql.DataSource;
-import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = Configuration.class)
@@ -35,6 +36,11 @@ public class InsertMoviesTest {
     @Named("postgresDataSource")
     DataSource dataSource;
 
+
+    @Inject
+    @Named("postgresSessionFactory")
+    SessionFactory sf;
+
     @Test
     public void testPostgresDataSource() throws Exception {
         assertNotNull(dataSource);
@@ -44,39 +50,71 @@ public class InsertMoviesTest {
     }
 
     @Test
-    public void testInsertIntoDatabase() throws Exception {
-        List<Movie> movies = readMoviesFromJson();
-        Connection connection = dataSource.getConnection();
-        Statement statement = connection.createStatement();
-        for (Movie movie : movies) {
-            System.out.println(movie);
-            statement.executeUpdate("INSERT INTO MOVIES (movie_id, title, genres, added, description, PosterURL,external_id) VALUES ('" + movie.getMovie_id() + "', '" + movie.getTitle() + "', '" + movie.getGenres() + "', '" + movie.getAdded() + "', '" + movie.getDescription() + "', '" + movie.getPosterURL() + "', '" + movie.getExternal_id() + "')");
-        }
-        connection.close();
-    }
+    public void jsonToMovieObjects() throws IOException, ParseException {
 
-    private List<Movie> readMoviesFromJson() throws Exception {
-        List<Movie> movies = new ArrayList<>();
-        BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/movies.json"));
-        StringBuilder sb = new StringBuilder();
-        String line = reader.readLine();
-        while (line != null) {
-            sb.append(line);
-            line = reader.readLine();
-        }
-        reader.close();
+        //JSON parser object to parse read file
+        JSONParser jsonParser = new JSONParser();
 
-        Gson gson = new Gson();
-        Type movieListType = new TypeToken<List<Movie>>(){}.getType();
-        movies = gson.fromJson(sb.toString(), movieListType);
-        printMovies(movies);
-        return movies;
-    }
+        String genresofMovies[] = {"trending", "topRated", "romance", "horror", "documentary", "comedy", "action"};
 
-    private void printMovies(List<Movie> movies) {
-        for (Movie movie : movies) {
-            System.out.println(movie);
+
+
+        for (String genre : genresofMovies) {
+            try(FileReader reader = new FileReader("src/main/resources/" + genre + "Movies.json")) {
+                //Read JSON file
+                Object obj = jsonParser.parse(reader);
+
+                JSONArray moviesList = (JSONArray) obj;
+
+                moviesList.forEach(movie -> {
+                    parseMovieObject((JSONObject) movie);
+                });
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+
+            }
+
+
+    private void parseMovieObject(@NotNull JSONObject movie) {
+        //Get movie object within list
+        JSONObject movieObject = (JSONObject) movie.get("movie");
+
+        System.out.println(movieObject);
+
+        String overview = movieObject.containsKey("overview") ? (String) movieObject.get("overview") : "";
+        String backdropURL = movieObject.containsKey("backdrop_path") ? (String) movieObject.get("backdrop_path") : "";
+        String genre = (String) movieObject.get("genre");
+        String poster_path = (String) movieObject.get("poster_path");
+        String release_date = (String) movieObject.get("release_date");
+        String title = (String) movieObject.get("title");
+
+
+
+
+        System.out.println("Title: " + title);
+        System.out.println("Overview: " + overview);
+        System.out.println("Poster Path: " + poster_path);
+        System.out.println("Backdrop Path: " + backdropURL);
+        System.out.println("Release Date: " + release_date);
+        System.out.println("Genre: " + genre);
+
+        Movie movie1 = new Movie();
+
+        movie1.setTitle(title);
+        movie1.setDescription(overview);
+        movie1.setPosterURL(poster_path);
+        movie1.setBackdropURL(backdropURL);
+        movie1.setAdded(release_date);
+        movie1.setGenre(genre);
+        movie1.setViews(0);
+        movieObject = (JSONObject) movie.get("movie");
+
+
+        MovieDAO movieDAO = new MovieDAO(sf);
+        movieDAO.addMovie(movie1);
     }
 
 

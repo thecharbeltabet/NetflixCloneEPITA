@@ -30,4 +30,48 @@ public class MovieController {
         return movieRepository.getAllActionMovies();
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping("/movies/comedy")
+    public List<Movie> getAllComedyMovies(){
+        return movieRepository.getAllComedyMovies();
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping("/movies/romance")
+    public List<Movie> getAllRomanceMovies(){
+        return movieRepository.getAllRomanceMovies();
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping("/movies/horror")
+    public List<Movie> getAllHorrorMovies(){
+        return movieRepository.getAllHorrorMovies();
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping("/movies/documentary")
+    public List<Movie> getAllDocumentaries(){
+        return movieRepository.getAllDocumentaries();
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping("/movies/top-rated")
+    public List<Movie> getTopRatedMovies(){
+        return movieRepository.getTopRatedMovies();
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping("/movies/trending")
+    public List<Movie> getTrendingMovies(){
+        return movieRepository.getTrendingMovies();
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping("/movies/top10")
+    public List<Movie> getTopViewed(){
+        return movieRepository.getTopViewedMovies();
+    }
+
+
+
 }

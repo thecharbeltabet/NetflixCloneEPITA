@@ -11,11 +11,11 @@ import java.util.List;
 
 // This is the DAO class for the Movie class
 @Service
-public class MovieJPADAO {
+public class MovieDAO {
 
     private final SessionFactory factory;
 
-    public MovieJPADAO(SessionFactory factory) {
+    public MovieDAO(SessionFactory factory) {
         this.factory = factory;
     }
 
@@ -81,6 +81,19 @@ public class MovieJPADAO {
         return movies;
     }
 
+    // Add a view to a movie
+    public Movie addViewCount(int movie_id) {
+        // get movie by id
+        Movie movie = getMovie(movie_id);
+        movie.setViews(movie.getViews() + 1);
+        Session session = getSession();
+        Transaction transaction = session.beginTransaction();
+        session.update(movie);
+        transaction.commit();
+        session.close();
+        return movie;
+    }
+
     // Get all action movies
     public List<Movie> getAllActionMovies() {
         Session session = getSession();
@@ -91,6 +104,98 @@ public class MovieJPADAO {
         session.close();
         return movies;
     }
+
+    // Get all comedy movies
+    public List<Movie> getAllComedyMovies() {
+        Session session = getSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery("from Movie where genre = 'Comedy'");
+        List<Movie> movies = query.list();
+        tx.commit();
+        session.close();
+        return movies;
+    }
+
+    // Get all drama movies
+    public List<Movie> getAllDramaMovies() {
+        Session session = getSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery("from Movie where genre = 'Drama'");
+        List<Movie> movies = query.list();
+        tx.commit();
+        session.close();
+        return movies;
+    }
+
+    // Get all horror movies
+
+    public List<Movie> getAllHorrorMovies() {
+        Session session = getSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery("from Movie where genre = 'Horror'");
+        List<Movie> movies = query.list();
+        tx.commit();
+        session.close();
+        return movies;
+    }
+
+    // Get all romance movies
+    public List<Movie> getAllRomanceMovies() {
+        Session session = getSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery("from Movie where genre = 'Romance'");
+        List<Movie> movies = query.list();
+        tx.commit();
+        session.close();
+        return movies;
+    }
+
+    //Get all documentaries
+    public List<Movie> getAllDocumentaries() {
+        Session session = getSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery("from Movie where genre = 'Documentary'");
+        List<Movie> movies = query.list();
+        tx.commit();
+        session.close();
+        return movies;
+    }
+
+    // Get top rated movies
+    public List<Movie> getTopRatedMovies() {
+        Session session = getSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery("from Movie order by rating desc");
+        List<Movie> movies = query.list();
+        tx.commit();
+        session.close();
+        return movies;
+    }
+
+    // Get top viewed movies
+    public List<Movie> getTopViewedMovies() {
+        Session session = getSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery("from Movie order by views desc");
+        query.setMaxResults(10);
+        List<Movie> movies = query.list();
+        tx.commit();
+        session.close();
+        return movies;
+    }
+
+    // Get trending movies
+    public List<Movie> getTrendingMovies() {
+        Session session = getSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery("from Movie order by views desc");
+        query.setMaxResults(10);
+        List<Movie> movies = query.list();
+        tx.commit();
+        session.close();
+        return movies;
+    }
+
 
     // Delete all movies
     public void deleteAllMovies() {
