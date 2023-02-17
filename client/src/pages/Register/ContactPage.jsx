@@ -54,10 +54,10 @@ function ContactPage() {
         <div className='Auth-form-container'>
             <div>
                 <img
-                    src={'/images/logo.png'}
-                    alt='MockFlix Logo'
-                    height={70}
-                    width={200}
+                    src={'/images/logo.JPG'}
+                    alt='My Logo'
+                    height={100}
+                    width={150}
                 />
             </div>
             <form className='Auth-form' onSubmit={handleSubmit}>

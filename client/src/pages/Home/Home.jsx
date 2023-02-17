@@ -8,7 +8,7 @@ import requests from '../../configuration/config';
 function Home() {
 
     useEffect(() => {
-        setBackgroundColor('/images/home-background.jpg');
+        setBackgroundColor('./images/home-background.jpg');
     }
 
         , []);

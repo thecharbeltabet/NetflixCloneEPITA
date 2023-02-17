@@ -43,21 +43,21 @@ function SubscriptionPage() {
         <div className='Auth-form-container'>
             <div>
                 <img
-                    src={'/images/logo.png'}
-                    alt='Netflix Logo'
-                    height={70}
-                    width={200}
+                    src={'/images/logo.JPG'}
+                    alt='My Logo'
+                    height={100}
+                    width={150}
                 />
             </div>
             <form className='Auth-form'>
                 <button onClick={handleBasic} type='submit' className='loginButton'>
-                    Basic - 9.99€
+                    Poor - 9$
                 </button>
                 <button onClick={handlePremium} type='submit' className='loginButton'>
-                    Premium - 13.99€
+                    Middle Class - 10$
                 </button>
                 <button onClick={handleUltimate} type='submit' className='loginButton'>
-                    Ultimate - 14.99€
+                    Rich - 20$
                 </button>
             </form>
         </div>

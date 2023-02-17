@@ -45,6 +45,7 @@ function Login() {
             login(formValues, dispatch, navigate);
             document.body.style.backgroundImage = 'none';
             document.body.style.backgroundColor = '#111';
+            document.body.style.filter = "blur(0px)";
         }
     };
 
@@ -58,10 +59,10 @@ function Login() {
         <div className='Auth-form-container'>
             <div>
                 <img
-                    src='/images/logo.png'
-                    alt='Netflix Logo'
-                    height={70}
-                    width={200}
+                    src='/images/logo.JPG'
+                    alt='My Logo'
+                    height={100}
+                    width={150}
                 />
             </div>
             <form className='Auth-form' onSubmit={handleSubmit}>
