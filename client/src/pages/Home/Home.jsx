@@ -19,6 +19,9 @@ function Home() {
         document.body.style.backgroundPosition = 'center';
     }
 
+    document.title = "Netflix Clone";
+    
+
     return (
         <div className="App">
 
