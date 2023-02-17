@@ -22,16 +22,16 @@ function App() {
 
   const { dispatch } = useAppStateContext();
 
-  if (JSON.parse(localStorage.getItem('MockflixProfile')) === null) {
+  if (JSON.parse(localStorage.getItem('Profile')) === null) {
     window.localStorage.setItem(
-      'MockflixProfile',
+      'Profile',
       JSON.stringify({ isAuthenticated: false })
     );
   }
 
   useEffect(() => {
     const userProfile = JSON.parse(
-      window.localStorage.getItem('MockflixProfile')
+      window.localStorage.getItem('Profile')
     );
 
     if (userProfile !== null) {
